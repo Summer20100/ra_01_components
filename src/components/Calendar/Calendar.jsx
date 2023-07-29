@@ -89,7 +89,10 @@ const Calendar = (props) => {
 
       for (let j = 0; j < DAYS_IN_WEEK; j++) {
         if ((i === 0 && j < currentWeekDay) || day > data.daysInMonth) {
-          result[i][j] = new Date(year, month - 1, day--);
+          result[i][j] = undefined;
+        //  result[i][j] = new Date(previousYear, previousMonth, previousMonthDays.length);
+        //} else if ((i === 0 && j > currentWeekDay) || day > data.daysInMonth) {
+        //  result[i][j] = new Date(nexYear, nexMonth, day++);
         } else {
           result[i][j] = new Date(year, month, day++);
         }
