@@ -75,12 +75,8 @@ const Calendar = (props) => {
   nexMonthDays = Array.from({ length: nexMonthDays }, (_, i) => i + 1);
   nexMonth++;
 
-
-
   console.log(previousMonthDays.length);
   console.log(nexMonthDays.length);
-
-
 
   const DAYS_IN_WEEK = 7;
 
@@ -93,7 +89,7 @@ const Calendar = (props) => {
 
       for (let j = 0; j < DAYS_IN_WEEK; j++) {
         if ((i === 0 && j < currentWeekDay) || day > data.daysInMonth) {
-          result[i][j] = new Date(year, month - 1);
+          result[i][j] = new Date(year, month - 1, day--);
         } else {
           result[i][j] = new Date(year, month, day++);
         }

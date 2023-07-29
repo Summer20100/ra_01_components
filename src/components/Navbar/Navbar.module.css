@@ -21,7 +21,6 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  -webkit-transition: all .3s ease;
   transition: all .3s ease;
   text-transform: uppercase;
   border-radius: 10px;
@@ -29,6 +28,5 @@
 
 .button:hover {
   background: #555;
-  -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
