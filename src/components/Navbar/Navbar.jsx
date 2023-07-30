@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const Navbar = () => {
   return (
     <div className={ s.navbar }>
-      <NavLink to='storefunc'>
+      <NavLink to='/storefunc'>
         <input type='button' className={ s.button } value='STOREFUNC' />
       </NavLink>   
 

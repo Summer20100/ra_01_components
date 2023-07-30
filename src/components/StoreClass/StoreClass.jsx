@@ -1,5 +1,5 @@
 import s from './StoreClass.module.css'
-import { Route, Routes, NavLink } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import ShopItemClass from './ShopItemClass/ShopItemClass'
 
 const StoreClass = () => {
