@@ -1,9 +1,9 @@
 import s from './Calendar.module.css'
 import { Route, Routes } from 'react-router-dom'
 
-const Calendar = (props) => {
-  const now = new Date()
-  let currentWeekDay = [0, 1, 2, 3, 4, 5, 6][now.getDay()];
+const Calendar = ({now}) => {
+ 
+  let currentWeekDay = [6, 0, 1, 2, 3, 4, 5][now.getDay()];
 
   Date.prototype.daysInMonth = function() {
     return 33 - new Date(this.getFullYear(), this.getMonth(), 33).getDate();
@@ -29,70 +29,51 @@ const Calendar = (props) => {
     weekDay: now.getDay(),
     daysInMonth: getDaysInMonth(now),
     currentWeekDay,
-    monthNames: [
-      'Январь',
-      'Февраль',
-      'Март',
-      'Апрель',
-      'Май',
-      'Июнь',
-      'Июль',
-      'Август',
-      'Сентябрь',
-      'Октябрь',
-      'Ноябрь',
-      'Декабрь'
-    ],
-    weekDayNames: [
-      'Пн',
-      'Вт',
-      'Ср',
-      'Чт',
-      'Пт',
-      'Сб',
-      'Вс'
-    ],
-    weekDayFullNames: [
-      'Воскресенье',
-      'Понедельник',
-      'Вторник',
-      'Среда',
-      'Четверг',
-      'Пятница',
-      'Суббота'
+    monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь' ],
+    monthNumber: {
+      January: 0,
+      February: 1,
+      March: 2,
+      April: 3,
+      May: 4,
+      June: 5,
+      July: 6,
+      August: 7,
+      September: 8,
+      October: 9,
+      Novermber: 10,
+      December: 11
+  },
+    weekDaysFromMonday: [6, 0, 1, 2, 3, 4, 5],
+    weekDayNames: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+    weekDayFullNames: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье',
     ]
   }
 
-  let previousMonth = ((new Date()).getMonth() - 1) < 0 ? 11 : (new Date()).getMonth() - 1;
-  let previousYear = (previousMonth === 11) ? (new Date()).getFullYear() - 1 : (new Date()).getFullYear();
-  let previousMonthDays = new Date(previousYear, previousMonth + 1, 0).getDate();
-  previousMonthDays = Array.from({ length: previousMonthDays }, (_, i) => i + 1);
-  previousMonth++;
-
-  let nexMonth = ((new Date()).getMonth() + 1) > 12 ? 0 : (new Date()).getMonth() + 1;
-  let nexYear = (nexMonth === 12) ? (new Date()).getFullYear() + 1 : (new Date()).getFullYear();
-  let nexMonthDays = new Date(nexYear, nexMonth - 1, 0).getDate();
-  nexMonthDays = Array.from({ length: nexMonthDays }, (_, i) => i + 1);
-  nexMonth++;
-
-  console.log(previousMonthDays.length);
-  console.log(nexMonthDays.length);
-
   const DAYS_IN_WEEK = 7;
 
-  const getMonthData = (year, month) => {
+  const getDayOfWeek = (date) => {
+    const dayOfWeek = date.getDay();
+    return data.weekDaysFromMonday[dayOfWeek];
+  }
+
+  const getMonthData = (year, month) => {     
     const result = [];
+
+    const date = new Date(year, month)
+    const daysInMonth = getDaysInMonth(date)
+
+    const monthStartsOn = getDayOfWeek(date)
+
+  
     let day = 1;
 
-    for (let i = 0; i < (data.daysInMonth + currentWeekDay) / DAYS_IN_WEEK; i++) {
+    for (let i = 0; i < (daysInMonth + monthStartsOn) / DAYS_IN_WEEK; i++) {
       result[i] = [];
 
       for (let j = 0; j < DAYS_IN_WEEK; j++) {
-        if ((i === 0 && j < currentWeekDay) || day > data.daysInMonth) {
+        if ((i === 0 && j < monthStartsOn) || day > daysInMonth) {
           result[i][j] = undefined;
-        //  result[i][j] = new Date(previousYear, previousMonth, previousMonthDays.length);
-        //} else if ((i === 0 && j > currentWeekDay) || day > data.daysInMonth) {
-        //  result[i][j] = new Date(nexYear, nexMonth, day++);
         } else {
           result[i][j] = new Date(year, month, day++);
         }

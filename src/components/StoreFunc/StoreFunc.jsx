@@ -2,16 +2,7 @@ import s from './StoreFunc.module.css'
 import { Route, Routes, NavLink } from 'react-router-dom'
 import ShopItemFunc from './ShopItemFunc/ShopItemFunc'
 
-const StoreFunc = () => {
-  const item = {
-    brand: 'Tiger of Sweden',
-    title: 'Leonard coat',
-    description: 'Minimalistic coat in cotton-blend',
-    descriptionFull: 'Men\'s minimalistic overcoat in cotton-blend. Features a stand-up collar, concealed front closure and single back vent. Slim fit with clean, straight shape. Above-knee length.',
-    price: 399,
-    currency: '£'
-  }
-
+const StoreFunc = ({ item }) => {
   return (
     <Routes>
       <Route path='/storefunc' element={
